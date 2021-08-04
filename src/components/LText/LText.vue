@@ -11,25 +11,30 @@
 import { defineComponent } from "vue";
 import {
   transformToComponentProps,
-  textDefaultProps,
-  textStylePropNames,
-} from "@/types/defaultProps";
-import { useComponentCommon } from "@/hooks/index";
-const defaultProps = transformToComponentProps(textDefaultProps);
+  componentsDefaultProps,
+  isEditingProp,
+} from "@/defaultProps";
+import useComponentClick from "@/hooks/useComponentClick";
+import useStylePick from "@/hooks/useStylePick";
+const extraProps = {
+  tag: {
+    type: String,
+    default: "p",
+  },
+  ...isEditingProp,
+};
+const defaultProps = transformToComponentProps(
+  componentsDefaultProps["l-text"].props,
+  extraProps
+);
 export default defineComponent({
   name: "l-text",
   props: {
     ...defaultProps,
-    tag: {
-      type: String,
-      default: "div",
-    },
   },
   setup(props) {
-    const { styleProps, handleClick } = useComponentCommon(
-      props,
-      textStylePropNames
-    );
+    const styleProps = useStylePick(props);
+    const handleClick = useComponentClick(props);
     return {
       styleProps,
       handleClick,
@@ -37,3 +42,17 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+h2.l-text-component,
+p.l-text-component {
+  margin-bottom: 0;
+}
+button.l-text-component {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.l-text-component {
+  box-sizing: border-box;
+  white-space: pre-wrap;
+}
+</style>
