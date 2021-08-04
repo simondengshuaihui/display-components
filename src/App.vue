@@ -11,10 +11,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-
+import { defineComponent } from "vue";
+export interface Test {
+  name: string;
+}
 export default defineComponent({
-  name: 'App',
+  name: "App",
 });
 </script>
 
