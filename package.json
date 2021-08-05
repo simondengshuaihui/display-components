@@ -12,8 +12,7 @@
     "lint": "vue-cli-service lint",
     "build:es": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
-    "clean": "rimraf ./dist",
-    "prepublishOnly": "yarn test:unit && yarn build"
+    "clean": "rimraf ./dist"
   },
   "husky": {
     "hooks": {
