@@ -1,9 +1,5 @@
-# 慕课乐高标准模版
+# vue lego 展示组件
 
 ## 特性
-* 开箱即用
-* **typescript** 
-* Vue3
-* 支持 tsx
-* eslint
-* 简单易用可扩展
+
+包含 Ltext、LImage、LShape,用于编辑后台和展示

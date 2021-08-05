@@ -2,48 +2,43 @@
   "name": "display-components",
   "version": "1.0.0",
   "private": false,
-  "main": "dist/display-components.umd.js",
-  "module": "dist/display-components.esm.js",
-  "types": "dist/index.d.ts",
   "description": "Lego Vue3 components library",
   "author": "Simonhui",
-  "license": "MIT",
-  "keywords": [
-    "Component",
-    "UI",
-    "Vue"
-  ],
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "yarn clean && yarn build:es && yarn build:umd",
+    "test:unit": "vue-cli-service test:unit",
+    "test:watch": "vue-cli-service test:unit --watch",
+    "lint": "vue-cli-service lint",
     "build:es": "rollup --config build/rollup.esm.config.js",
     "build:umd": "rollup --config build/rollup.umd.config.js",
-    "lint": "vue-cli-service lint",
     "clean": "rimraf ./dist",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn test:unit && yarn build"
   },
+  "main": "dist/display-components.umd.js",
+  "module": "dist/display-components.esm.js",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "core-js": "^3.6.5",
     "lodash-es": "^4.17.21"
   },
-  "peerDependencies": {
-    "vue": "^3.0.0"
-  },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@rollup/pluginutils": "^4.1.1",
+    "@types/jest": "^24.0.19",
     "@types/lodash-es": "^4.17.4",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "@vue/test-utils": "^2.0.0-0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
     "rollup": "^2.55.1",
@@ -53,6 +48,17 @@
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-vue": "^6.0.0",
     "typescript": "~3.9.3",
+    "vue": "^3.0.0",
+    "vue-jest": "^5.0.0-0"
+  },
+  "peerDependencies": {
     "vue": "^3.0.0"
-  }
+  },
+  "keywords": [
+    "Component",
+    "UI",
+    "Vue"
+  ],
+  "license": "MIT",
+  "types": "dist/index.d.ts"
 }
