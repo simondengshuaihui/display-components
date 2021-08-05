@@ -7,7 +7,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "yarn clean && yarn build:es && yarn build:umd",
-    "test:unit": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "build:es": "rollup --config build/rollup.esm.config.js",
