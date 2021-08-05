@@ -15,6 +15,11 @@
     "clean": "rimraf ./dist",
     "prepublishOnly": "yarn test:unit && yarn build"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
   "main": "dist/display-components.umd.js",
   "module": "dist/display-components.esm.js",
   "files": [
@@ -41,6 +46,7 @@
     "@vue/test-utils": "^2.0.0-0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
+    "husky": "4",
     "rollup": "^2.55.1",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-exclude-dependencies-from-bundle": "^1.1.20",
