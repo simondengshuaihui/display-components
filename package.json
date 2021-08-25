@@ -1,6 +1,6 @@
 {
   "name": "display-components",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "private": false,
   "description": "Lego Vue3 components library",
   "author": "Simonhui",
@@ -20,8 +20,8 @@
       "pre-commit": "yarn lint"
     }
   },
-  "main": "dist/display-components.umd.js",
-  "module": "dist/display-components.esm.js",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
   "files": [
     "dist"
   ],
