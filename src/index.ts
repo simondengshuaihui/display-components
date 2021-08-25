@@ -21,4 +21,6 @@ export {
     LShape
 }
 
-export default install
+export default {
+    install
+}
