@@ -1,6 +1,6 @@
 {
   "name": "display-components",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "private": false,
   "description": "Lego Vue3 components library",
   "author": "Simonhui",
@@ -66,5 +66,5 @@
     "Vue"
   ],
   "license": "MIT",
-  "types": "dist/src/index.d.ts"
+  "types": "dist/index.d.ts"
 }

@@ -26,7 +26,7 @@ export default {
     nodeResolve(),
     typescript({ tsconfigOverride: overrides }),
     vue(),
-    css({ output: 'bundle.css' }),
+    css({ output: 'index.css' }),
   ],
   external: ['vue', 'lodash-es'],
 }
