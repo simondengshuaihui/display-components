@@ -1,24 +1,20 @@
 <template>
   <div
-    @click.prevent="handleClick"
     :style="styleProps"
     class="l-shape-component"
-    :draggable="false"
+    @click.prevent="handleClick"
   ></div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import useStylePick from "../../hooks/useStylePick";
-import useComponentClick from "../../hooks/useComponentClick";
+import useComponentCommon from "../../hooks/useComponentCommon";
 import {
-  componentsDefaultProps,
   transformToComponentProps,
-  isEditingProp,
+  shapeDefaultProps,
+  shapeStylePropsNames,
 } from "../../defaultProps";
-const defaultProps = transformToComponentProps(
-  componentsDefaultProps["l-shape"].props,
-  isEditingProp
-);
+const defaultProps = transformToComponentProps(shapeDefaultProps);
+
 // array that contains style props
 export default defineComponent({
   name: "l-shape",
@@ -26,9 +22,12 @@ export default defineComponent({
     ...defaultProps,
   },
   setup(props) {
-    const styleProps = useStylePick(props);
-    const handleClick = useComponentClick(props);
-
+    // 重用并且简化
+    // 抽离并且获得 styleProps
+    const { styleProps, handleClick } = useComponentCommon(
+      props,
+      shapeStylePropsNames
+    );
     return {
       styleProps,
       handleClick,

@@ -7,7 +7,13 @@ const file = (type) => `dist/index.${type}.js`
 export { file, name }
 const overrides = {
   compilerOptions: { declaration: true },
-  exclude: ['node_modules', 'src/App.vue', 'src/main.ts'],
+  exclude: [
+    'node_modules',
+    'src/App.vue',
+    'src/main.ts',
+    'tests/**/*.ts',
+    'tests/**/*.tsx',
+  ],
 }
 export default {
   input: 'src/index.ts',

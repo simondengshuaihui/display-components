@@ -4,37 +4,36 @@
     :style="styleProps"
     class="l-text-component"
     @click="handleClick"
-    >{{ text }}</component
   >
+    {{ text }}
+  </component>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import useComponentCommon from "../../hooks/useComponentCommon";
 import {
   transformToComponentProps,
-  componentsDefaultProps,
-  isEditingProp,
-} from "@/defaultProps";
-import useComponentClick from "@/hooks/useComponentClick";
-import useStylePick from "@/hooks/useStylePick";
-const extraProps = {
-  tag: {
-    type: String,
-    default: "p",
-  },
-  ...isEditingProp,
-};
-const defaultProps = transformToComponentProps(
-  componentsDefaultProps["l-text"].props,
-  extraProps
-);
+  textDefaultProps,
+  textStylePropNames,
+} from "../../defaultProps";
+const defaultProps = transformToComponentProps(textDefaultProps);
+// array that contains style props
 export default defineComponent({
   name: "l-text",
   props: {
+    tag: {
+      type: String,
+      default: "div",
+    },
     ...defaultProps,
   },
   setup(props) {
-    const styleProps = useStylePick(props);
-    const handleClick = useComponentClick(props);
+    // 重用并且简化
+    // 抽离并且获得 styleProps
+    const { styleProps, handleClick } = useComponentCommon(
+      props,
+      textStylePropNames
+    );
     return {
       styleProps,
       handleClick,
@@ -42,6 +41,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <style scoped>
 h2.l-text-component,
 p.l-text-component {
@@ -54,5 +54,6 @@ button.l-text-component {
 .l-text-component {
   box-sizing: border-box;
   white-space: pre-wrap;
+  position: relative !important;
 }
 </style>

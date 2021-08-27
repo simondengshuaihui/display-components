@@ -2,7 +2,7 @@
   <img
     :style="styleProps"
     class="l-image-component"
-    :src="imageSrc"
+    :src="src"
     @click.prevent="handleClick"
     :draggable="false"
   />
@@ -11,23 +11,21 @@
 import { defineComponent } from "vue";
 import {
   transformToComponentProps,
-  componentsDefaultProps,
-  isEditingProp,
+  imageDefaultProps,
+  imageStylePropsNames,
 } from "@/defaultProps";
-import useComponentClick from "@/hooks/useComponentClick";
-import useStylePick from "@/hooks/useStylePick";
-const defaultProps = transformToComponentProps(
-  componentsDefaultProps["l-image"].props,
-  isEditingProp
-);
+import useComponentCommon from "@/hooks/useComponentCommon";
+const defaultProps = transformToComponentProps(imageDefaultProps);
 export default defineComponent({
   name: "l-image",
   props: {
     ...defaultProps,
   },
   setup(props) {
-    const styleProps = useStylePick(props);
-    const handleClick = useComponentClick(props);
+    const { styleProps, handleClick } = useComponentCommon(
+      props,
+      imageStylePropsNames
+    );
     return {
       styleProps,
       handleClick,
