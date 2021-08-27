@@ -1,63 +1,57 @@
 import { shallowMount } from '@vue/test-utils'
-import LText from '@/components/LText'
-import { componentsDefaultProps } from '@/defaultProps'
+import LText from '../../src/components/LText'
+import { textDefaultProps } from '../../src/defaultProps'
 describe('LText.vue', () => {
-  const { location } = window
-  beforeEach((): void => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      delete window.location;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      window.location = {
-          href: '',
-      }
+  const { location } = window 
+  beforeEach(() => {
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: { href: '' }
+    })
   })
-  afterEach((): void => {
-      window.location = location;
+  afterEach(() => {
+    window.location = location
   })
   it('default LText render', () => {
     const msg = 'test'
     const props = {
-      ...componentsDefaultProps['l-text'],
+      ...textDefaultProps,
       text: msg
     }
     const wrapper = shallowMount(LText, { props })
-    const style = wrapper.attributes().style
     // should have the right text
-    expect(wrapper.text()).toMatch(msg)
-    // should be p tag
-    expect(wrapper.element.tagName).toBe('P')
-    // should have one css attr
+    expect(wrapper.text()).toBe(msg)
+    // should be default div tag
+    expect(wrapper.element.tagName).toBe('DIV')
+    // should have certian css attr
+    const style = wrapper.attributes().style
+    console.log(style)
     expect(style.includes('font-size')).toBeTruthy()
     // should not have prop has been filtered
     expect(style.includes('actionType')).toBeFalsy()
   })
-  it('LText with actionType and URL should trigger location href change', () => {
+  it('LText with actionType and URL should trigger location href change', async () => {
     const props = {
-      ...componentsDefaultProps['l-text'],
-      actionType: 'to',
+      ...textDefaultProps,
+      actionType: 'url',
       url: 'http://dummy.url',
       tag: 'h2'
     }
     const wrapper = shallowMount(LText, { props })
-    // should be h2
     expect(wrapper.element.tagName).toBe('H2')
-    // trigger the element
-    wrapper.trigger('click')
-    expect(window.location.href).toBe(props.url)
+    await wrapper.trigger('click')
+    expect(window.location.href).toBe('http://dummy.url')
   })
-  it('LText with isEditing should not trigger location change', () => {
+  it('LText with isEditing should not trigger location change', async () => {
     const props = {
-      ...componentsDefaultProps['l-text'],
-      actionType: 'to',
+      ...textDefaultProps,
+      actionType: 'url',
       url: 'http://dummy.url',
       tag: 'h2',
       isEditing: true
     }
     const wrapper = shallowMount(LText, { props })
-    // trigger the element
-    wrapper.trigger('click')
-    expect(window.location.href).not.toBe(props.url)
+    await wrapper.trigger('click')
+    expect(window.location.href).not.toBe('http://dummy.url')
   })
 })

@@ -1,12 +1,12 @@
 import { shallowMount } from '@vue/test-utils'
 import LImage from '@/components/LImage'
-import { componentsDefaultProps } from '@/defaultProps'
+import { imageDefaultProps } from '../../src/defaultProps'
 describe('LImage.vue', () => {
   it('default LImage render', () => {
     const srcPath = 'test.jpg'
     const props = {
-      ...componentsDefaultProps['l-image'],
-      imageSrc: srcPath
+      ...imageDefaultProps,
+      src: srcPath
     }
     const wrapper = shallowMount(LImage, { props })
     const style = wrapper.attributes().style
@@ -16,6 +16,6 @@ describe('LImage.vue', () => {
     // should be Img tag
     expect(wrapper.element.tagName).toBe('IMG')
     // should not have prop has been filtered
-    expect(style.includes('imageSrc')).toBeFalsy()
+    expect(style.includes('src')).toBeFalsy()
   })
 })
